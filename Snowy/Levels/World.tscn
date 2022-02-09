@@ -7,7 +7,6 @@
 [ext_resource path="res://Objects/Rock.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/Camera.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/Spawner.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Sprites/Font.tres" type="DynamicFont" id=8]
 [ext_resource path="res://Scripts/Score Counter.gd" type="Script" id=9]
 [ext_resource path="res://Objects/WorldEnvironment.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Objects/Light.tscn" type="PackedScene" id=11]
@@ -18,8 +17,12 @@
 [ext_resource path="res://Sounds/Select.wav" type="AudioStream" id=16]
 [ext_resource path="res://Scripts/GameButton.gd" type="Script" id=17]
 
+[sub_resource type="DynamicFont" id=9]
+size = 60
+font_data = ExtResource( 12 )
+
 [sub_resource type="Theme" id=1]
-default_font = ExtResource( 8 )
+default_font = SubResource( 9 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 150
@@ -28,11 +31,11 @@ font_data = ExtResource( 12 )
 [sub_resource type="Theme" id=3]
 default_font = SubResource( 2 )
 
-[sub_resource type="StyleBoxEmpty" id=9]
+[sub_resource type="StyleBoxEmpty" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="StyleBoxEmpty" id=10]
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [sub_resource type="PhysicsMaterial" id=7]
 rough = true
@@ -51,7 +54,7 @@ anchor_right = 0.5
 margin_left = -90.0
 margin_top = 9.0
 margin_right = 90.0
-margin_bottom = 84.0
+margin_bottom = 98.0
 theme = SubResource( 1 )
 text = "Score: 0"
 scroll_active = false
@@ -64,9 +67,9 @@ __meta__ = {
 autostart = true
 
 [node name="SCORE" type="RichTextLabel" parent="CanvasLayer"]
-margin_left = 870.679
+margin_left = 871.0
 margin_top = 286.0
-margin_right = 1032.68
+margin_right = 1100.0
 margin_bottom = 523.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -95,7 +98,7 @@ margin_top = 600.0
 margin_right = 807.0
 margin_bottom = 826.0
 focus_neighbour_right = NodePath("../Exit")
-custom_styles/focus = SubResource( 9 )
+custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 script = null
 
@@ -107,7 +110,7 @@ margin_top = 600.0
 margin_right = 1388.0
 margin_bottom = 826.0
 focus_neighbour_left = NodePath("../Play")
-custom_styles/focus = SubResource( 10 )
+custom_styles/focus = SubResource( 6 )
 text = "Exit"
 script = ExtResource( 17 )
 
