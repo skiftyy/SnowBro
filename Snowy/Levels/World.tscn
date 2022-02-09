@@ -1,0 +1,161 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://Objects/Floor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Snowball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Mountain.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Border.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Rock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Camera.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Spawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sprites/Font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Scripts/Score Counter.gd" type="Script" id=9]
+[ext_resource path="res://Objects/WorldEnvironment.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/Light.tscn" type="PackedScene" id=11]
+[ext_resource path="res://SUNMORI.otf" type="DynamicFontData" id=12]
+[ext_resource path="res://Scripts/GameCanvas.gd" type="Script" id=13]
+[ext_resource path="res://Objects/Button.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scripts/World.gd" type="Script" id=15]
+[ext_resource path="res://Sounds/Select.wav" type="AudioStream" id=16]
+[ext_resource path="res://Scripts/GameButton.gd" type="Script" id=17]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 150
+font_data = ExtResource( 12 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="PhysicsMaterial" id=7]
+rough = true
+
+[sub_resource type="PhysicsMaterial" id=8]
+
+[node name="World" type="Spatial"]
+script = ExtResource( 15 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 13 )
+
+[node name="ScoreCounter" type="RichTextLabel" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -90.0
+margin_top = 9.0
+margin_right = 90.0
+margin_bottom = 84.0
+theme = SubResource( 1 )
+text = "Score: 0"
+scroll_active = false
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="CanvasLayer/ScoreCounter"]
+autostart = true
+
+[node name="SCORE" type="RichTextLabel" parent="CanvasLayer"]
+margin_left = 870.679
+margin_top = 286.0
+margin_right = 1032.68
+margin_bottom = 523.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 3 )
+text = "31"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio" type="AudioStreamPlayer" parent="CanvasLayer"]
+stream = ExtResource( 16 )
+
+[node name="Container" type="Container" parent="CanvasLayer"]
+margin_right = 1426.0
+margin_bottom = 1343.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" parent="CanvasLayer/Container" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 600.0
+margin_top = 600.0
+margin_right = 807.0
+margin_bottom = 826.0
+focus_neighbour_right = NodePath("../Exit")
+custom_styles/focus = SubResource( 9 )
+custom_styles/normal = SubResource( 5 )
+script = null
+
+[node name="Exit" parent="CanvasLayer/Container" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 1200.0
+margin_top = 600.0
+margin_right = 1388.0
+margin_bottom = 826.0
+focus_neighbour_left = NodePath("../Play")
+custom_styles/focus = SubResource( 10 )
+text = "Exit"
+script = ExtResource( 17 )
+
+[node name="Spawner" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 115, 0 )
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 10 )]
+
+[node name="Light" parent="." instance=ExtResource( 11 )]
+
+[node name="Snowball" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+physics_material_override = SubResource( 7 )
+
+[node name="Mountain_winter_001" parent="." instance=ExtResource( 3 )]
+transform = Transform( -1.14044e-06, 0, -7, 0, 7, 0, 7, 0, -1.14044e-06, 187.024, -0.405838, 0.856537 )
+
+[node name="Mountain_winter_002" parent="." instance=ExtResource( 3 )]
+transform = Transform( -1.14044e-06, 0, -7, 0, 7, 0, 7, 0, -1.14044e-06, -190, 1, 0 )
+
+[node name="Mountain_winter_003" parent="." instance=ExtResource( 3 )]
+transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 1, -185 )
+
+[node name="Floor" parent="." groups=[
+"Floor",
+] instance=ExtResource( 1 )]
+transform = Transform( 3, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0 )
+physics_material_override = SubResource( 8 )
+
+[node name="StaticBody" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.4266, -20.8595 )
+
+[node name="StaticBody2" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -19.9468, 30.4266, -25.0282 )
+
+[node name="StaticBody4" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 27.5809, 30.4266, -25.0282 )
+
+[node name="StaticBody3" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -19.9468, 30.4266, 39.5799 )
+
+[node name="Camera" parent="." instance=ExtResource( 6 )]
+
+[node name="Rock" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 225.848, 0 )
+[connection signal="timeout" from="CanvasLayer/ScoreCounter/Timer" to="CanvasLayer/ScoreCounter" method="_on_Timer_timeout"]
+[connection signal="button_up" from="CanvasLayer/Container/Play" to="CanvasLayer" method="_on_Play_button_up"]
+[connection signal="button_up" from="CanvasLayer/Container/Exit" to="CanvasLayer" method="_on_Exit_button_up"]
+[connection signal="timeout" from="Snowball/Spawn" to="Spawner" method="_on_Spawn_timeout"]
+
+[editable path="Snowball"]
